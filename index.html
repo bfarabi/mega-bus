@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bus Ticket</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!--Header and Menu Section-->
+    <header class="container">
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a class="active" href="#">Sign Up</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!--Booking Section-->
+    <main  class="main-content container">
+
+        <div class="booking-content">
+            <h1>Mega City Bus</h1>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+        </div>
+
+
+        <div id="mainSection" class="booking-form">
+            <h3>Explore By Bus</h3>
+
+            <div class="inputs">
+                <div class="input-group">
+                    <label" for="" class="">From</label>
+                    <input class="inp-style " type="text" name="" placeholder="Dhaka">
+                </div>
+                <div class="input-group">
+                    <label" for="" class="">To</label>
+                    <input class="inp-style " type="text" name="" placeholder="Chittagone">
+                </div>
+            </div>
+
+            <div class="inputs">
+                <div class="input-group">
+                    <label" for="" class="">Departure</label>
+                    <input class="inp-style " type="date" name="">
+                </div>
+                <div class="input-group">
+                    <label for="" class="">Return</label>
+                    <input class="inp-style " type="date" name="">
+                </div>
+            </div>
+            <div class="inputs">
+                <div class="input-group f-class">
+                <div >
+                    <label for="">First Class ($150)</label>
+                    <input class="inp-style inp-width " id="firstClass-input" type="number" value="0" name="">
+
+                </div>
+                <div class="plus-minus-btn">
+                 <p><button class="plusBtn" onclick="handleTicketsChange('firstClass', true)"> <i> + </i> </button> 
+                    <button class="minusBtn" onclick="handleTicketsChange('firstClass', false)"> - </button>
+                </p>
+                </div>
+            </div>
+                <div class="input-group f-class">
+                    <div>
+                        <label for="">Economy ($100)</label>
+                        <input class="inp-style inp-width " id="economy-input" type="number" value="0" name="">
+                    </div>
+                    <div class="plus-minus-btn">
+                        <p> <button class="plusBtn" onclick="handleTicketsChange('economy', true)">+</button> 
+                            <button class="minusBtn" onclick="handleTicketsChange('economy', false)">-</button> </p>
+                    </div>
+                </div>
+
+            </div>
+            <div class="calculations">
+                <div class="amount">
+                    <div class="left">
+                        <p>Subtotal</p>
+                    </div>
+                    <div class="right">
+                        <p > $ <span id="subTotalAmount" >00</span></p>
+                    </div>
+                </div>
+
+                <div class="amount">
+                    <div class="left">
+                        <p >Charge 10% VAT</p>
+                    </div>
+                    <div class="right">
+                        <p >$ <span id="taxAmount">0</span></p>
+                    </div>
+                </div>
+                <hr>
+                <div class="amount">
+                    <div class="left">
+                        <h4>Total</h4>
+                    </div>
+                    <div class="right">
+                        <p >$ <span id="totalPrice">00</span></p>
+                    </div>
+                </div>
+            </div>
+            <button  id="bookButton" class="btn-style">Book Now</button>
+        </div>
+        <div id="confirmForm">
+            <header>
+                 <h2>Successfully purchased Your Ticket!</h2>
+                 <h3>Ticket Details</h3>
+            </header>
+            <table class="table table-bordered">
+                
+                <tbody>
+
+                  <tr>
+                    <td class="strong">From</td>
+                    <td class="user-from"> </td>
+                  </tr>
+
+                  <tr>
+                    <td class="strong">To</td>
+                    <td class="user-to"></td>
+                  </tr>
+
+                  <tr>
+                    <td class="strong">Departure</td>
+                    <td class="user-departure-date"></td>
+                  </tr>
+
+                  <tr>
+                    <td class="strong">Return</td>
+                    <td class="user-return-date"></td>
+                  </tr>
+                  <tr>
+                    <td class="strong">First Class</td>
+                    <td class="user-first-class"></td>
+                  </tr>
+                  <tr>
+                    <td class="strong">Economy</td>
+                    <td class="user-economy-class"></td>
+                  </tr>
+                  <tr class="twopx">
+                    <td class="strong">Subtotal</td>
+                    <td class="user-subtotal"></td>
+                  </tr>
+                  <tr>
+                    <td class="strong">Vat</td>
+                    <td class="user-vat"></td>
+                  </tr>
+                  <tr>
+                    <td class="strong">Total</td>
+                    <td ></td>
+                  </tr>
+                  
+                </tbody>
+              </table>
+            <button class="finishBtn" onclick="window.location.reload();" >Ok</button>
+        </div>
+    </main>
+
+    <!--Thank You-->
+    <!-- js area start -->
+    <script>
+
+        function handleTicketsChange(Ticket, Increasing){
+
+    const  inputNumber=document.getElementById(Ticket +"-input");
+      const parseinput= parseInt(inputNumber.value);
+      let inputNewCount = parseinput ;
+         if(Increasing==true){
+            inputNewCount=parseinput+1;
+         }
+         if(Increasing==false && parseinput>0){
+            inputNewCount=parseinput-1;
+         }
+      inputNumber.value= inputNewCount;
+
+    calculating();
+   }
+
+   function calculating(){
+       const firstClassInput =document.getElementById('firstClass-input');
+       const firstClassCount = parseInt(firstClassInput.value);
+
+       const economyInput = document.getElementById('economy-input');
+       const economycount = parseInt(economyInput.value);
+
+    const subtotalPrice =firstClassCount * 150 +economycount * 100;
+       document.getElementById("subTotalAmount").innerText=subtotalPrice;
+       const tax= Math.round(subtotalPrice*0.1);
+       document.getElementById("taxAmount").innerText= tax;
+       const totalAmount= subtotalPrice+tax;
+       document.getElementById("totalPrice").innerText=totalAmount;
+   }
+
+   function myFunction() {
+  confirm("Do you want to purchase?");
+}
+
+
+document.querySelector('.btn-style').addEventListener('click', function () {
+    document.querySelector('#mainSection').style.display = 'none';
+    document.querySelector('#confirmForm').style.display = 'block';
+    myFunction();
+
+});
+
+    </script>
+    <!-- end js area. Thank You -->
+</body>
+
+</html>
